@@ -13,6 +13,9 @@ router.use("/",function(req,res,next){
 });
 //只处理 /admin路由
 router.get("/",function(req,res){
-    res.send("admin首页");
+    res.render("admin/index",{ });
+});
+router.get("/addArticle",function(req,res){
+    res.render("admin/addArticle",{ });
 });
 module.exports = router;

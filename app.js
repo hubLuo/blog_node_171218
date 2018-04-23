@@ -7,9 +7,7 @@ app.get("/",function(req,res){
    res.send("欢迎来到我的博客");
 });
 //后端模块
-app.use("/admin",function(req,res){
-   res.send("hello admin");
-});
+app.use("/admin",require("./router/admin"));
 //会员模块
 app.get("/member",function(req,res){
    res.send("hello member");

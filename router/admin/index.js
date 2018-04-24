@@ -18,4 +18,7 @@ router.get("/",function(req,res){
 router.get("/addArticle",function(req,res){
     res.render("admin/addArticle",{ });
 });
+router.get("/addType",function(req,res){
+    res.render("admin/addType",{ });
+});
 module.exports = router;

@@ -48,8 +48,9 @@
                                         <select name="type" class="form-control input-sm">
                                             <!-- 自定义一个格式：-1表示用户没有选择文章类型-->
                                             <option value="-1">请选择文章类型</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
+                                            <% for(var i=0;i<type.length;i++){%>
+                                                <option value="<%=type[i].id%>"><%=type[i].typename%></option>
+                                            <%}%>
                                         </select>
                                     </div>
                                 </div>

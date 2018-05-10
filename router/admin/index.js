@@ -46,6 +46,13 @@ router.post("/addArticle",function(req,res){
     //res.render("admin/addArticle",{});
 
 });
+router.get("/articleList",function(req,res){
+    Article.find({}).populate("type").exec(function(err,article){
+        console.log(article)
+        res.render("admin/articleList",{art:article });
+    });
+    //res.render("admin/articleList",{ });
+});
 router.get("/addType",function(req,res){
     res.render("admin/addType",{ });
 });

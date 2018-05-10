@@ -1,0 +1,67 @@
+<%- include('header') -%>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <%- include('nav') -%>
+    <!-- right-side -->
+    <aside class="right-side">
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="panel">
+                        <header class="panel-heading">
+                            <a href="/admin/addArticle">添加文章</a>
+                            <a href="javascript:void(0);">删除文章</a>
+                            <a href="javascript:void(0);">我的文章</a>
+                            <a href="javascript:void(0);">文章回收站</a>
+
+                        </header>
+                        <!-- <div class="box-header"> -->
+                        <!-- <h3 class="box-title">Responsive Hover Table</h3> -->
+
+                        <!-- </div> -->
+                        <div class="panel-body table-responsive">
+                            <div class="box-tools m-b-15">
+                                <div class="input-group">
+                                    <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-default">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-hover">
+                                <tbody>
+                                <tr>
+                                    <th>标题</th>
+                                    <th>作者</th>
+                                    <th>文章</th>
+                                    <th>阅读数量</th>
+                                    <th>操作</th>
+                                </tr>
+                                <% for(var i = 0;i < art.length;i++){ %>
+                                <tr>
+                                    <td><%= art[i].title%></td>
+                                    <td><%= art[i].author%></td>
+                                    <td><%= art[i].type.typename%></td>
+                                    <td>
+                                        <span class="label label-success" ><%=art[i].read%></span>
+                                    </td>
+                                    <td><a href="javascript:void(0);">修改</a></td>
+                                </tr>
+
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </aside>
+    <!-- /.right-side -->
+</div>
+<%- include('footer') -%>

@@ -43,7 +43,11 @@
                                 <tr>
                                     <td><%= art[i].title%></td>
                                     <td><%= art[i].author%></td>
-                                    <td><%= art[i].type.typename%></td>
+                                    <td>
+                                        <a href="/admin/articleList?type=<%= art[i].type._id%>">
+                                            <%= art[i].type.typename%>
+                                        </a>
+                                    </td>
                                     <td>
                                         <span class="label label-success" ><%=art[i].read%></span>
                                     </td>

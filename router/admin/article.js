@@ -37,6 +37,12 @@ router.post("/addArticle",function(req,res){
 /*
  * 添加文章类型块----------------
  * */
+//展示文章类型页
+router.get("/articleTypeList",function(req,res){
+    arcModle.findArcType({},function(err,result){
+        res.render("admin/arcTypeList",{arcType:result});
+    });
+});
 //展示添加文章类型页
 router.get("/addType",function(req,res){
     res.render("admin/addType",{ });

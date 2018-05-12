@@ -20,8 +20,21 @@ module.exports={
     },
     addArc(req,callback){
         formidable_post(req,function(err,fields,files){
+            fields.updatetime = fields.createtime = new Date();//添加时间字段
+            console.log("ADD----",fields);
             Article.create(fields,function(err){
                 callback(err);
+            });
+        });
+    },
+    updateArc:function(req,callback){
+        formidable_post(req,function(err,fields,files){
+            fields.updatetime = new Date();
+            console.log("update----",fields);
+            //更新数据库语句有问题，这里只是演示下过程。
+            Article.update(fields,function(err){
+                callback(err);
+                //res.send("插入成功");
             });
         });
     },

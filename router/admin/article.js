@@ -31,6 +31,38 @@ router.post("/addArticle",function(req,res){
         res.redirect("/admin/articleList");
     });
 });
+//修改文章显示
+router.get("/editArticle",function(req,res,next){
+
+    var aid = req.query._id;
+/*    arcModle.updateArticle({"_id":aid},function(err,art){
+        //.....
+        console.log("artModel loading...");
+        console.log(art);
+        res.render("admin/updateArticle",art);
+
+    });*/
+
+    arcModle.findArc({"_id":aid},function(err,art){
+        console.log("artModel loading...");
+        arcModle.findArcType({},function(err,type){
+            console.log({art:art[0],artType:type});
+            res.render("admin/updateArticle",{art:art[0],artType:type});
+        });
+    });
+
+
+});
+//修改文章操作
+router.post("/editArticle",function(req,res,next){
+    arcModle.updateArc(req,function(err){
+        if(err){
+            console.log(err);
+            return;
+        }
+        res.redirect("/admin/articleList");
+    })
+});
 
 
 

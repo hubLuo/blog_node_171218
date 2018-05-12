@@ -38,6 +38,11 @@ module.exports={
             });
         });
     },
+    delArc:function(params,callback){
+        Article.remove(params,function(err){
+            callback(err);
+        });
+    },
     findArcType(condition,callback){
         ArticleType.find(condition || {},function(err,result){
             callback(err,result);

@@ -63,7 +63,20 @@ router.post("/editArticle",function(req,res,next){
         res.redirect("/admin/articleList");
     })
 });
+//删除文章操作
+router.get("/delArticle",function(req,res,next){
+    //拿到需要删除的文章ID
+    var aid = req.query._id;
 
+    arcModle.delArc({_id:aid},function(err){
+        if(err){
+            console.log(err);
+            return;
+        }
+        res.redirect("/admin/articleList");
+       // res.send("删除成功");
+    });
+});
 
 
 /*

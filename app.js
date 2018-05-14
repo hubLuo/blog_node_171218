@@ -10,6 +10,8 @@ app.get("/",function(req,res){
 });
 //后端模块
 app.use("/admin",require("./router/admin"));
+//引入用户注册和登录路由模块
+app.use(require("./router/user/users.js"));
 //会员模块
 app.get("/member",function(req,res){
    res.send("hello member");

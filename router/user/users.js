@@ -5,6 +5,15 @@ var express = require("express");
 var router = express.Router();
 var userModel = require("../../modles/user/users.js");//用户注册登录模块
 
+/*router.get("/!*",function(req,res,next){
+    console.log(req.session);
+    if(!req.session.userInfos){
+        res.redirect("/login");
+        //next();
+        //return false;
+    }
+});*/
+
 //注册页
 router.get("/reg",function(req,res,next){
     res.render("users/register");

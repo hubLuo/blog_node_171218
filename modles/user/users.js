@@ -17,6 +17,7 @@ function formidable_post (req,callback){
     });
 };
 function md5(context){
+    //MD5加密不能反编译
     var md5 = crypto.createHash("md5");
     return  md5.update(context).digest("base64");
 };
@@ -24,9 +25,6 @@ module.exports = {
     register:function(fields,callback){
         //在此处，需要给用户验证过滤信息
         //用户验证这里只是留了一个口子，真正在公司项目中需要把这一块完善
-        //var md5 = crypto.createHash("md5");
-        //MD5加密不能反编译
-        //fields.password = md5.update(fields.password).digest("base64");
         fields.password = md5(fields.password);
         fields.regtime = fields.updatetime = new Date();
         fields.rank = 1;//标记用户等级的，可以定义一个规则，比如用户1-10表示普通用户，11-20表示管理员
@@ -49,28 +47,6 @@ module.exports = {
         Users.find({username:req.body.username},function(err,result){
             callback(err,result,req.body);
         });
-/*        var form = new formidable.IncomingForm();
-
-        form.parse(req, function(err, fields, files) {
-            //res.writeHead(200, {'content-type': 'text/plain;charset=UTF-8'});
-            //用户传入的数据？
-            //在此处，需要给用户验证过滤信息
-            //用户验证这里只是留了一个口子，真正在公司项目中需要把这一块完善
-            if(fields.username != "" && fields.password != ""){
-                Users.find({username:fields.username},function(err,result){
-                    callback(err,result,fields);
-                });
-
-            }else{
-                //定义一个约定，-1表示参数没有填完
-                callback("-1");
-                //res.send("填写不及格，请继续填写");
-            }
-
-            //res.end(util.inspect({fields: fields, files: files}));
-
-            //课下自行先插入数据试试，展开测试
-        });*/
     },
     queryUserInfo:function(req,callback){
 
@@ -80,9 +56,6 @@ module.exports = {
                 console.log(err);
                 return;
             }
-            //var md5 = crypto.createHash("md5");
-            //MD5加密不能反编译
-            //req.body.password = md5.update(req.body.password).digest("base64");
             req.body.password = md5(req.body.password);
             console.log(result);
             if(result ==  null){
@@ -91,7 +64,7 @@ module.exports = {
             }else if(result.username == req.body.username && result.password == req.body.password){
                 //rank：记录权限登记  0-10普通用户，11-20管理员
                 //设置session，但是在开发时需要注意，每次重启之后session会消失
-                //req.session.userInfos = {name:result.username,sign:true};
+                req.session.userInfos = {name:result.username,sign:true};
                 /*
                  为什么不把rank加入缓存
                  假如我们把rank保存到缓存了，确实从访问上很方便
@@ -112,7 +85,15 @@ module.exports = {
         });
     },
     isAdmin:function(username,callback){
-
+        Users.findOne({username:username},function(err,result){
+            console.log(result);
+            console.log(".....");
+            if(result.rank > 10){
+                callback(err,true);
+            }else{
+                callback(err,false);
+            }
+        });
     }
 
 }

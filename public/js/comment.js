@@ -8,11 +8,11 @@ $('#messageBtn').on('click',function(){
         url:'/addComment',
         type:"post",
         data:{
-            contentid:$('#contentId').val(),
+            article:$('#contentId').val(),
             content:$('#messageContent').val(),
         },
         success:function(data){
-            //console.log(responseData);
+            console.log(data);
             $('#messageContent').val('');
             loadData(data);
         }
@@ -23,7 +23,7 @@ $.ajax({
     type:'get',
     url:'/commentList',
     data:{
-        contentid:$('#contentId').val()
+        article:$('#contentId').val()
     },
     success:function(data){
         console.log(data);

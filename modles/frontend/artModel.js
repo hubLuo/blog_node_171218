@@ -22,6 +22,7 @@ module.exports = {
     },
     addComment:function(req,callback){
         var obj = req.body;
+        console.log("addCC",obj)
         obj.createtime = new Date();
         obj.author = req.session.userInfos?req.session.userInfos:"匿名";
         Comment.create(obj,function(err){

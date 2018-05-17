@@ -39,7 +39,8 @@ router.get("/detail", function (req, res, next) {
 router.post("/addComment", function (req, res, next) {
     artModel.addComment(req, function () {
         //添加完成之后，加载新的列表
-        artModel.findComment({ article: req.body._id }, function (err, result) {
+        console.log("addC--",req.body)
+        artModel.findComment({ article: req.body.article }, function (err, result) {
             if (err) {
                 console.log(err);
                 return;
@@ -50,7 +51,8 @@ router.post("/addComment", function (req, res, next) {
 });
 
 router.get("/commentList",function(req,res,next){
-    artModel.findComment({ article: req.body._id }, function (err, result) {
+    console.log("showL",req.query);
+    artModel.findComment({ article: req.query.article }, function (err, result) {
         if (err) {
             console.log(err);
             return;
